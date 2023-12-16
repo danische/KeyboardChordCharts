@@ -50,9 +50,9 @@ MuseScore {
       }
    }
 
-   function getChordName(noteList) {
+   function getChordName(noteList,key) {
       if (noteList.length > 2) {
-         return ChordNames.getChordName(noteList);
+         return ChordNames.getChordName(noteList,key);
       }
    }
 
