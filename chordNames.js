@@ -52,7 +52,8 @@ function getInterval(notes) {
 }
 
 function getNoteName(note, key) {
-    return keyNames[key.toString()][note % 12]
+    const keyName = keyNames[key.toString()][note % 12];
+    return keyName[0].toUpperCase()+ keyName.substring(1);
 }
 
 const keys = {
@@ -76,7 +77,7 @@ const keys = {
 const keyNames = {
     '0': ['C', 'c#', 'D', 'd#', 'E', 'F', 'f#', 'G', 'g#', 'A', 'a#', 'B'],     // C/Am
     '1': ['C', 'c#', 'D', 'd#', 'E', 'f', 'F#', 'G', 'g#', 'A', 'a#', 'B'],     // G/Em
-    '2': ['c', 'C#', 'D', 'd#', 'E', 'f', 'F#', 'G', 'G#', 'A', 'A#', 'B'],     // D/Bm
+    '2': ['c', 'C#', 'D', 'd#', 'E', 'f', 'F#', 'G', 'g#', 'A', 'a#', 'B'],     // D/Bm
     '3': ['c', 'C#', 'D', 'd#', 'E', 'f', 'F#', 'g', 'G#', 'A', 'a#', 'B'],     // A/F#m
     '4': ['c', 'C#', 'd', 'D#', 'E', 'f', 'F#', 'g', 'G#', 'A', 'a#', 'B'],     // E/C#m
     '5': ['c', 'C#', 'd', 'D#', 'E', 'f', 'F#', 'g', 'G#', 'a', 'A#', 'B'],     // B/G#m
@@ -86,10 +87,11 @@ const keyNames = {
     '-7': ['c', 'Db', 'd', 'Eb', 'Fb', 'f', 'Gb', 'G', 'Ab', 'a', 'Bb', 'Cb'],  // Cb/Abm
     '-6': ['c', 'Db', 'd', 'Eb', 'e', 'F', 'Gb', 'g', 'Ab', 'a', 'Bb', 'Cb'],   // Gb/Ebm
     '-5': ['C', 'Db', 'd', 'Eb', 'e', 'F', 'Gb', 'g', 'Ab', 'a', 'Bb', 'b'],    // Db/Bbm
-    '-4': ['C', 'Db', 'd', 'Eb', 'e', 'F', 'f#', 'G', 'Ab', 'a', 'Bb', 'b'],    // Ab/Fm
-    '-3': ['C', 'c#', 'D', 'Eb', 'e', 'F', 'f#', 'G', 'Ab', 'a', 'Bb', 'b'],    // Eb/Cm
-    '-2': ['C', 'c#', 'D', 'Eb', 'e', 'F', 'f#', 'G', 'g#', 'A', 'Bb', 'b'],    // Bb/Gm
-    '-1': ['C', 'c#', 'D', 'eb', 'E', 'F', 'f#', 'G', 'g#', 'A', 'Bb', 'b'],    // F/Dm
+    '-4': ['C', 'Db', 'd', 'Eb', 'e', 'F', 'gb', 'G', 'Ab', 'a', 'Bb', 'b'],    // Ab/Fm
+    '-3': ['C', 'db', 'D', 'Eb', 'e', 'F', 'gb', 'G', 'Ab', 'a', 'Bb', 'b'],    // Eb/Cm
+    '-2': ['C', 'db', 'D', 'Eb', 'e', 'F', 'gb', 'G', 'ab', 'A', 'Bb', 'b'],    // Bb/Gm
+    '-1': ['C', 'db', 'D', 'eb', 'E', 'F', 'gb', 'G', 'ab', 'A', 'Bb', 'b'],    // F/Dm
+
 };
 
 function getChordName(notes, key = keys['C/Am']) {

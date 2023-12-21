@@ -45,15 +45,11 @@ MuseScore {
    }
 
    function getChordChart(noteList) {
-      if (noteList.length > 2) {
-         return '<font face="Keyboard Chord Diagram"/><font size="21"/>' + KeyboardChordCharts.getChordChart(noteList);
-      }
+      return '<font face="Keyboard Chord Diagram"/><font size="21"/>' + KeyboardChordCharts.getChordChart(noteList);
    }
 
    function getChordName(noteList,key) {
-      if (noteList.length > 2) {
-         return ChordNames.getChordName(noteList,key);
-      }
+      return ChordNames.getChordName(noteList,key);
    }
 
    onRun: {
@@ -113,19 +109,21 @@ MuseScore {
                   }
 
                   let noteList = getNoteList(cursor.element.notes);
+                  if (noteList.length > 2 || !fullScore)
+                  {
+                     let chordNameText = newElement(Element.STAFF_TEXT);
+                     chordNameText.text = getChordName(noteList,cursor.keySignature);
+                     cursor.add(chordNameText);
 
-                  let chordNameText = newElement(Element.STAFF_TEXT);
-                  chordNameText.text = getChordName(noteList,cursor.keySignature);
-                  cursor.add(chordNameText);
+                     const chordChart = getChordChart(noteList);
+                     let text = newElement(Element.STAFF_TEXT);
+                     text.fontSize *= 1.75
+                     text.text = chordChart
+                     cursor.add(text);
 
-                  const chordChart = getChordChart(noteList);
-                  let text = newElement(Element.STAFF_TEXT);
-                  text.fontSize *= 1.75
-                  text.text = chordChart
-                  cursor.add(text);
-
-                  switch (cursor.voice) {
-                     case 1: case 3: text.placement = Placement.BELOW; break;
+                     switch (cursor.voice) {
+                        case 1: case 3: text.placement = Placement.BELOW; break;
+                     }
                   }
                } // end if CHORD
                cursor.next();
